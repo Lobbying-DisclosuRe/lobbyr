@@ -1,3 +1,54 @@
+#' #' Search lobbying disclosure data
+#'
+#' This function allows users to search the Senate federal lobbying disclosures database (https://lda.senate.gov/api/redoc/v1/)
+#' to ascertain much companies are spending to lobby the federal government or how much lobbyists are being paid on behalf of clients
+#' to lobby on various issues. The query searches based on various criteria including issues, filing periods, client names, registrant
+#'  names, and dates.
+#'
+#'
+#' @param issues A character vector of specific issues to search for.
+#' @param issue_joiner A character string specifying how to combine the `issue` terms ("and" or "or").
+#' @param year A character string specifying the year to search within for results.
+#' @param filing_period  A character string specifying the filing period ("first_quarter", "second_quarter", etc.).
+#' @param client_name A character string specifying a client that a lobbyist was lobbying on behalf of.
+#' @param registrant_name A character string specifying the name of the entity that was registered to lobby.
+#' @param starting_date A character string specifying the start date for the search (YYYY-MM-DD).
+#' @param ending_date A character string specifying the end date for the search (YYYY-MM-DD).
+#' @param tidy_result A logical value indicating whether to return a simplified version of the returned data.
+#' @param ignore_disclaimer A logical value indicating whether to ignore the disclaimer explaining the limitations of the data.
+#'
+#' @returns  A data frame containing the search results.
+#' @export
+#'
+#' @examples
+#' get raw third quarter filings with ANY of the terms filed in the second half of 2024 (note this may require you to set your end date in 2025)
+#'
+#' df <- get_filings(
+#'  issues = c("tax", "trade", "health"),
+#'  issue_joiner =  "or",
+#   year = 2024, # can be used for only one year at a time
+#'  filing_period = "third_quarter",
+#'  ending_date = "2024-12-31", # format yyyy-mm-dd #filings sometimes are amended long after a quarter is over, so make sure you
+#'                                                  are setting your date to allow for that. Otherwise, you can just not use a
+#'                                                  start/ending date at all.
+#'  starting_date = "2024-06-01", # format yyyy-mm-dd
+#'  tidy_result = FALSE,
+#'  ignore_disclaimer = FALSE
+#'  )
+#'
+#'get a cleaner version of filings from the Chamber of Commerce that include ALL of the terms specified
+#'
+#' df <- get_filings(
+#'  issues = c("tax", "trade", "health"),
+#'  issue_joiner =  "and",
+#'  client_name = "Chamber of Commerce of the U.S.A.",
+#'  registrant_name = "Chamber of Commerce of the U.S.A.",
+#'  tidy_result = TRUE,
+#'  ignore_disclaimer = FALSE
+#'  )
+#'
+#'
+#'
 get_filings <- function(issues = c(""),
                         issue_joiner = "",
                         year = "",
@@ -166,4 +217,4 @@ get_filings <- function(issues = c(""),
 
   # return the finished data from API
   return(cleaned_data_to_work_with)
-}
+}  ## end function
