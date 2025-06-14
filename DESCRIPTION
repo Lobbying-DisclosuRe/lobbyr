@@ -1,16 +1,29 @@
-Package: DisclosuR
+Package: lobbyR
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Functions to get Federal Lobbying Disclosures
 Version: 0.1.0
 Authors@R: c(
     person(
-      "Jane", "Doe",
-      email = "jane@example.com",
+      "Chris", "Cioffi",
+      email = "chrisjcioffi@gmail.com",
       role = c("aut", "cre")
     )
   )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
-License: What license is it under?
+Description: This package allows users to query the Senate federal lobbying disclosures database (https://lda.senate.gov/api/redoc/v1/) 
+    to find out how much companies are spending to lobby the federal government. It allows for search terms such as keywords, time periods
+    and company names. It then attempts to clean, or at least flag, filings that could provide incorrect results when seeking to answer
+    the question. How much is being spent on lobbying our Congress and the administration?
+License: LGPL (>= 3)
 Encoding: UTF-8
 LazyData: true
+Suggests: 
+    spelling
+Language: en-US
+Imports: 
+    dplyr,
+    httr2,
+    keyring,
+    purrr,
+    readr,
+    stringr,
+    tidyr
