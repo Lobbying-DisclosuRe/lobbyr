@@ -6,21 +6,23 @@
 #'  names, and dates.
 #'
 #'
-#' @param issues A character vector of specific issues to search for.
-#' @param issue_joiner A character string specifying how to combine the `issue` terms ("and" or "or").
-#' @param year A character string specifying the year to search within for results.
-#' @param filing_period  A character string specifying the filing period ("first_quarter", "second_quarter", etc.).
+#' @param issues A character vector of specific issues you want to search for.
+#' @param issue_joiner A character string specifying how to combine the `issue` terms -- Only ("and" or "or") can be used.
+#' @param year A character string specifying the year to search within for results. -- Only one year can be used.
+#' @param filing_period  A character string specifying the filing period. -- Only the following can be used "first_quarter"
+#'  "second_quarter" "third_quarter" "fourth_quarter". Very old filings sometimes can only be separated by filing period
+#'  "mid_year" "year_end", but using those isn't recommended.
 #' @param client_name A character string specifying a client that a lobbyist was lobbying on behalf of.
 #' @param registrant_name A character string specifying the name of the entity that was registered to lobby.
-#' @param starting_date A character string specifying the start date for the search (YYYY-MM-DD).
-#' @param ending_date A character string specifying the end date for the search (YYYY-MM-DD).
+#' @param starting_date A character string specifying the start date for the search (Format is - YYYY-MM-DD).
+#' @param ending_date A character string specifying the end date for the search (Format is - YYYY-MM-DD).
 #' @param tidy_result A logical value indicating whether to return a simplified version of the returned data.
 #' @param ignore_disclaimer A logical value indicating whether to ignore the disclaimer explaining the limitations of the data.
 #'
-#' @returns  A data frame containing the search results.
+#' @return  A data frame containing the search results.
 #' @export
-#'
 #' @examples
+#'
 #' get raw third quarter filings with ANY of the terms filed in the second half of 2024 (note this may require you to set your end date in 2025)
 #'
 #' df <- get_filings(

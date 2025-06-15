@@ -1,3 +1,38 @@
+#' Flag and Optionally Clean Duplicate or Dubious Lobbying Filings
+#'
+#'Identifies and flags potentially problematic or duplicate lobbying filings in a data frame
+#'(typically one returned by \code{get_filings()}). The function adds several diagnostic columns to help users spot
+#'filings that may require closer inspection, and can optionally remove all but the latest filing for each
+#'egistrant-client-quarter group.
+#'
+#' @param cleaned_dataframe_from_previous_function - A data frame, typically the output of \code{get_filings()}, containing lobbying filings to be checked for duplicates or other issues.
+#' @param find_duplicates Logical. If \code{TRUE} (default), the function flags dubious filings using several heuristics and regex patterns.
+#' @param attempt_cleaning Logical. If \code{TRUE} (default), the function removes all but the latest filing for each registrant-client-quarter group, assuming the most recent filing is the most accurate.
+#'
+#' @details
+#' The function creates several columns to help identify filings that may be of concern:
+#' \itemize{
+#'   \item \code{registration_or_termination}: TRUE if the filing is a registration or termination filing (detected via regex).
+#'   \item \code{quarter_number}: Extracted quarter number from \code{filing_type}.
+#'   \item \code{is_amendment}: TRUE if the filing is an amendment.
+#'   \item \code{has_quarter}, \code{has_amendment}, \code{registration_termination}, \code{is_duplicate}: Various flags for duplicate or suspicious filings.
+#'   \item \code{checkme}: "CHECK" if the row is flagged as potentially problematic, otherwise "PASS CHECK".
+#' }
+#' If \code{attempt_cleaning = TRUE}, the function keeps only the latest filing (by \code{dt_posted}) for each registrant, client, year, and filing period, after removing registration and termination filings.
+#'
+#' @return A data frame with additional columns indicating potential issues, and (optionally) with duplicate filings removed.
+#' @export
+#' @examples
+#'
+#' # Flag and clean duplicate filings in a lobbying data frame
+#'
+#' dupes_flag_test_clean <- flag_dupes(df, find_duplicates = TRUE, attempt_cleaning = TRUE)
+#'
+#' # Only flag, do not remove duplicates
+#'
+#' flagged_only <- flag_dupes(df, find_duplicates = TRUE, attempt_cleaning = FALSE)
+#'
+#' @seealso \code{\link{get_filings}}
 flag_dupes <- function(cleaned_dataframe_from_previous_function, find_duplicates = TRUE, attempt_cleaning = TRUE) {
   if (find_duplicates) {
     dupes_flagged <- cleaned_dataframe_from_previous_function |>
