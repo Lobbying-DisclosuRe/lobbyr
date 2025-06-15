@@ -7,6 +7,10 @@ Authors@R: c(
       "Chris", "Cioffi",
       email = "chrisjcioffi@gmail.com",
       role = c("aut", "cre")
+    ),  person(
+      "Aarushi", "Sahejpal",
+      email = "aarushi@american.edu",
+      role = c("aut", "ctb")
     )
   )
 Description: This package allows users to query the Senate federal lobbying disclosures database (https://lda.senate.gov/api/redoc/v1/) 
@@ -20,10 +24,16 @@ Suggests:
     spelling
 Language: en-US
 Imports: 
+    cli,
     dplyr,
+    glue,
     httr2,
     keyring,
+    lifecycle,
     purrr,
     readr,
+    rlang,
     stringr,
-    tidyr
+    tidyr,
+    withr
+RoxygenNote: 7.3.2
