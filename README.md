@@ -19,11 +19,11 @@ securely storing your API key.
 ## Installation
 
 You can install the development version of lobbyR from
-[GitHub](https://github.com/) with:
+[GitHub](https://github.com/Lobbying-DisclosuRe/lobbyr) with:
 
 ``` r
 # install.packages("pak")
-pak::pak("Lobbying-DisclosuRe/lobbyr")
+pak::pak("https://github.com/Lobbying-DisclosuRe/lobbyr")
 ```
 
 ## Example
@@ -49,7 +49,7 @@ issue_joiner =  "or",
   tidy_result = T,
   ignore_disclaimer = F
 )
-#> Iterating ■■■■■■■■■                         25% | ETA:  3sIterating ■■■■■■■■■■■■■■■■                  50% | ETA:  2sIterating ■■■■■■■■■■■■■■■■■■■■■■■           75% | ETA:  1s                                                           DISCLAIMER: This data is known to contain errors and requires additional filtering and cleaning to ensure correct results.
+#> Iterating ■■■■■■■■■                         25% | ETA:  4sIterating ■■■■■■■■■■■■■■■■                  50% | ETA:  2sIterating ■■■■■■■■■■■■■■■■■■■■■■■           75% | ETA:  1s                                                           DISCLAIMER: This data is known to contain errors and requires additional filtering and cleaning to ensure correct results.
 #> See documentation for more guidance and filtering examples.
 #> 
 #> FACT CHECKING:
@@ -98,7 +98,7 @@ chamber_df <- get_filings(
   tidy_result = TRUE,
   ignore_disclaimer = TRUE
 )
-#> ⠙ Iterating 1 done (0.43/s) | 2.3sIterating ■■■■■                             14% | ETA: 15sIterating ■■■■■■■■■■                        29% | ETA: 15sIterating ■■■■■■■■■■■■■■                    43% | ETA: 12sIterating ■■■■■■■■■■■■■■■■■■                57% | ETA:  8sIterating ■■■■■■■■■■■■■■■■■■■■■■            71% | ETA:  6sIterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■       86% | ETA:  3s                                                           Disclaimer is muted. But you should read it, and can do that by removing ignore_disclaimer = TRUE from DisclosuR call
+#> ⠙ Iterating 1 done (0.39/s) | 2.6sIterating ■■■■■                             14% | ETA: 17sIterating ■■■■■■■■■■                        29% | ETA: 13sIterating ■■■■■■■■■■■■■■                    43% | ETA: 10sIterating ■■■■■■■■■■■■■■■■■■                57% | ETA:  8sIterating ■■■■■■■■■■■■■■■■■■■■■■            71% | ETA:  5sIterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■       86% | ETA:  2s                                                           Disclaimer is muted. But you should read it, and can do that by removing ignore_disclaimer = TRUE from DisclosuR call
 ```
 
 ### `flag_dupes()`

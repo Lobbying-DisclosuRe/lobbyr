@@ -22,11 +22,11 @@ The goal of lobbyR is to provide a suite of tools for querying, cleaning, and an
 
 ## Installation
 
-You can install the development version of lobbyR from [GitHub](https://github.com/) with:
+You can install the development version of lobbyR from [GitHub](https://github.com/Lobbying-DisclosuRe/lobbyr) with:
 
 ``` r
 # install.packages("pak")
-pak::pak("Lobbying-DisclosuRe/lobbyr")
+pak::pak("https://github.com/Lobbying-DisclosuRe/lobbyr")
 ```
 
 ## Example
