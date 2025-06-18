@@ -192,7 +192,7 @@ If you use this package in your research or reporting, please cite the data from
 
 ## Contact
 
-For questions, issues, or suggestions, please visit: https://github.com/yourusername/lobbyR
+This package was developed by Chris Cioffi. For questions, issues, or suggestions, please visit: https://github.com/Lobbying-DisclosuRe/lobbyr
 
 ---
 
