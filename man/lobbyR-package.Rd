@@ -4,16 +4,16 @@
 \name{lobbyR-package}
 \alias{lobbyR}
 \alias{lobbyR-package}
-\title{lobbyR: Functions to get Federal Lobbying Disclosures}
+\title{lobbyR: Functions to Get Federal Lobbying Disclosures}
 \description{
-This package allows users to query the Senate federal lobbying disclosures database (https://lda.senate.gov/api/redoc/v1/) to find out how much companies are spending to lobby the federal government. It allows for search terms such as keywords, time periods and company names. It then attempts to clean, or at least flag, filings that could provide incorrect results when seeking to answer the question. How much is being spent on lobbying our Congress and the administration?
+This package allows users to query the Senate federal lobbying disclosures database \url{https://lda.senate.gov/api/redoc/v1/} to find out how much companies are spending to lobby the federal government. It allows for search terms such as keywords, time periods and company names. It then attempts to clean, or at least flag, filings that could provide incorrect results when seeking to answer the question: How much is being spent on lobbying our Congress and the administration?
 }
 \author{
 \strong{Maintainer}: Chris Cioffi \email{chrisjcioffi@gmail.com}
 
 Authors:
 \itemize{
-  \item Aarushi Sahejpal \email{aarushi@american.edu} [contributor]
+  \item Aarushi Sahejpal \email{aarushisahejpal@gmail.com} [contributor]
 }
 
 }

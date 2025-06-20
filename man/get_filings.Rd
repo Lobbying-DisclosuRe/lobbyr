@@ -55,30 +55,32 @@ The returned data frame includes columns for registrant, client, filing type, in
 A disclaimer message is printed by default, reminding users to fact-check results and avoid double-counting. Set \code{ignore_disclaimer = TRUE} to suppress this message.
 }
 \examples{
-
-get raw third quarter filings that include any of the terms "tax", "trade", "health"
-
+\dontrun{
+# Get raw third quarter filings that include any of the terms "tax", "trade", "health"
 df <- get_filings(
- issues = c("tax", "trade", "health"),
- issue_joiner =  "or",
- filing_period = "third_quarter",
- tidy_result = FALSE,
- ignore_disclaimer = FALSE
- )
+  issues = c("tax", "trade", "health"),
+  issue_joiner = "or",
+  year = 2024, # can be used for only one year at a time
+  filing_period = "third_quarter",
+  tidy_result = FALSE,
+  ignore_disclaimer = FALSE
+)
 
-get a cleaner version of filings produced by the US Chamber of Commerce that include ALL of the terms specified
-
+# Get a cleaner version of filings produced by the US Chamber of Commerce
+# that include ALL of the terms specified
 df <- get_filings(
- issues = c("tax", "trade", "health"),
- issue_joiner =  "and",
- client_name = "Chamber of Commerce of the U.S.A.",
- registrant_name = "Chamber of Commerce of the U.S.A.",
- tidy_result = TRUE,
- ignore_disclaimer = FALSE
- )
+  issues = c("tax", "trade", "health"),
+  issue_joiner = "and",
+  client_name = "Chamber of Commerce of the U.S.A.",
+  registrant_name = "Chamber of Commerce of the U.S.A.",
+  tidy_result = TRUE,
+  ignore_disclaimer = FALSE
+)
 
-# Query filings for tax, company, or bill issues in the first quarter for a specific client/registrant - NOTE: this probably won't yield much in the way of results, but it uses every available parameter so you can see how they're used.
-
+# Query filings for tax, company, or bill issues in the first quarter
+# for a specific client/registrant - NOTE: this probably won't yield much
+# in the way of results, but it uses every available parameter so you can
+# see how they're used.
 bigger_temp <- get_filings(
   issues = c("tax", "company", "bill"),
   issue_joiner = "or",
@@ -90,8 +92,8 @@ bigger_temp <- get_filings(
   tidy_result = TRUE,
   ignore_disclaimer = TRUE
 )
-
+}
 }
 \seealso{
-[set_senate_api_key()] for entering and storing the disclosures api key, [flag_dupes()] for handling duplicate filings or amendments filed in the same quarter that can cause doublecounting, and [flag_client_registrant_conflict] for methods to prevent doublecounting when entities that file lobbying disclosures as registrants, but pay outside lobbying firms too, also show up as clients.
+[set_senate_api_key()] for entering and storing the disclosures api key, [flag_dupes()] for handling duplicate filings or amendments filed in the same quarter that can cause doublecounting, and [flag_client_registrant_conflict()] for methods to prevent doublecounting when entities that file lobbying disclosures as registrants, but pay outside lobbying firms too, also show up as clients.
 }
