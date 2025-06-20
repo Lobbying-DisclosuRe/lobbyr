@@ -98,11 +98,25 @@ get_filings <- function(issues = c(""),
 
   several_issues <- specific_issues(issues, issue_joiner)
 
+  #function that checks for an api key
+  get_api_key <- function() {
+    tryCatch(
+      {
+        keyring::key_get("senate_api_key")
+      },
+      error = function(e) {
+        stop("No API key found in keyring. Please run set_senate_api_key() first.")
+      }
+    )
+  }
+  api_key <- get_api_key()
+
   base_url <- "https://lda.senate.gov"
-  filings <- "/api/v1/filings/"
+  filings <- "api/v1/filings/"
+
   req <- httr2::request(base_url) |>
     httr2::req_url_path(filings) |>
-    httr2::req_headers(Authorization = paste0("Token ", keyring::key_get("senate_api_key"))) |>
+    httr2::req_headers(Authorization = paste0("Token ", api_key)) |>
     httr2::req_url_query(
       filing_specific_lobbying_issues = several_issues,
       filing_year = year,
@@ -114,17 +128,42 @@ get_filings <- function(issues = c(""),
     ) |>
     httr2::req_throttle(rate = 120 / 60)
 
-  resps <- httr2::req_perform_iterative(
-    req |> httr2::req_url_query(page_size = 25),
-    next_req = httr2::iterate_with_offset(
-      "page",
-      start = 1,
-      offset = 1,
-      resp_pages = function(resp) ceiling(httr2::resp_body_json(resp)$count / 25)
+
+  resps <- withCallingHandlers(
+    #with calling handlers used to throw a more verbose error on 404
+    httr2::req_perform_iterative(
+      req |> httr2::req_url_query(page_size = 25),
+      next_req = httr2::iterate_with_offset(
+        "page",
+        start = 1,
+        offset = 1,
+        resp_pages = function(resp) {
+          count <- httr2::resp_body_json(resp)$count
+          if (is.null(count) || count < 1) {
+            stop("The API response counts 0 records returned, or is missing for another reason. Please make sure you have entered at least one query parameter, and they're entered in the correct format and don't conflict. If you've done that and are still having issues, data for this query may be unavailable. Further troubleshooting can be done through the GUI https://lda.senate.gov/filings/public/filing/search/")
+          }
+          ceiling(count / 25)
+        }
+      ),
+      max_reqs = Inf
     ),
-    max_reqs = Inf
+    httr2_http_404 = function(cnd) {
+      rlang::abort("Connection with API unsuccessful. A more detailed error is possible by wrapping your get_filings() query thustly: 'httr2::with_verbosity(get_filings(add your arguments), verbosity = 2)' For more common issues visit https://lda.senate.gov/api/redoc/v1/#section/Common-Errors", parent = cnd)
+    },
+    httr2_http_400 = function(cnd){
+      rlang::abort("400 Bad Request typically due to invalid query string parameter values. A more detailed error is possible by wrapping your get_filings() query thustly: 'httr2::with_verbosity(get_filings(add your arguments), verbosity = 2)' For more common issues visit https://lda.senate.gov/api/redoc/v1/#section/Common-Errors", parent = cnd)
+    },
+    httr2_http_429 = function(cnd){
+      rlang::abort("Rate limit exceeded. Function throttling set for users with API key. A more detailed error is possible by wrapping your get_filings() query thustly: 'httr2::with_verbosity(get_filings(add your arguments), verbosity = 2)' For more common issues visit https://lda.senate.gov/api/redoc/v1/#section/Common-Errors", parent = cnd)
+    },
+    httr2_http_405 = function(cnd){
+      rlang::abort("unsupported HTTP method. A more detailed error is possible by wrapping your get_filings() query thustly: 'httr2::with_verbosity(get_filings(add your arguments), verbosity = 2)' For more common issues visit https://lda.senate.gov/api/redoc/v1/#section/Common-Errors", parent = cnd)
+    }
   )
-  readr::write_rds(resps, "resps_request_result.rds")
+  # readr::write_rds(resps, "resps_request_result.rds") # this can be utilized to save the results locally. Turned off, unless needed
+
+  #take response and unpack, clean it up
+
   unpackedhopeitworks <- resps |>
     httr2::resps_successes() |>
     httr2::resps_data(function(resp) httr2::resp_body_json(resp, check_type = TRUE, simplifyVector = TRUE, flatten = TRUE)$results)
