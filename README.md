@@ -46,8 +46,8 @@ issue_joiner =  "or",
  client_name = "7 Eleven, Inc.",
   ending_date = "2025-1-25", # format yyyy-mm-dd
   starting_date = "2020-04-01", # format yyyy-mm-dd
-  tidy_result = T,
-  ignore_disclaimer = F
+  tidy_result = TRUE,
+  ignore_disclaimer = FALSE
 )
 #> Iterating ■■■■■■■■■■■■■■■■                  50% | ETA:  2sIterating ■■■■■■■■■■■■■■■■■■■■■■■           75% | ETA:  1s                                                           DISCLAIMER: This data is known to contain errors and requires additional filtering and cleaning to ensure correct results.
 #> See documentation for more guidance and filtering examples.
@@ -72,6 +72,7 @@ dupes_flag_test <- flag_dupes(seven_eleven_filings, find_duplicates = TRUE, atte
 
 # Flag and remove potential double-counting between registrant and client
 flagged_conflict <- flag_client_registrant_conflict(seven_eleven_filings, flag_conflict = TRUE, clean_doublecounts = TRUE)
+#> This function either removed or identified lobbying filings that, if left in, could lead to doublecounting of spending on lobbying. It is not perfect. Please see documentation on tips for fact-checking these by hand.
 ```
 
 ## Main Functions
@@ -98,7 +99,7 @@ chamber_df <- get_filings(
   tidy_result = TRUE,
   ignore_disclaimer = TRUE
 )
-#> ⠙ Iterating 1 done (0.37/s) | 2.7sIterating ■■■■■                             14% | ETA: 18sIterating ■■■■■■■■■■                        29% | ETA: 13sIterating ■■■■■■■■■■■■■■                    43% | ETA: 11sIterating ■■■■■■■■■■■■■■■■■■                57% | ETA:  8sIterating ■■■■■■■■■■■■■■■■■■■■■■            71% | ETA:  5sIterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■       86% | ETA:  2s                                                           Disclaimer is muted. But you should read it, and can do that by removing ignore_disclaimer = TRUE from DisclosuR call
+#> ⠙ Iterating 1 done (0.39/s) | 2.6sIterating ■■■■■                             14% | ETA: 16sIterating ■■■■■■■■■■                        29% | ETA: 13sIterating ■■■■■■■■■■■■■■                    43% | ETA: 11sIterating ■■■■■■■■■■■■■■■■■■                57% | ETA:  8sIterating ■■■■■■■■■■■■■■■■■■■■■■            71% | ETA:  5sIterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■       86% | ETA:  3s                                                           Disclaimer is muted. But you should read it, and can do that by removing ignore_disclaimer = TRUE from DisclosuR call
 ```
 
 ### `flag_dupes()`
@@ -127,7 +128,8 @@ dupes_flag_test <- flag_dupes(chamber_df, find_duplicates = TRUE, attempt_cleani
 #### Example
 
 ``` r
-flagged_conflict <- flag_client_registrant_conflict(chamber_df, flag_conflict = TRUE, clean_doublecounts = TRUE)
+flagged_and_clean_conflict <- flag_client_registrant_conflict(seven_eleven_filings, flag_conflict = TRUE, clean_doublecounts = TRUE)
+#> This function either removed or identified lobbying filings that, if left in, could lead to doublecounting of spending on lobbying. It is not perfect. Please see documentation on tips for fact-checking these by hand.
 ```
 
 ### `set_senate_api_key()`

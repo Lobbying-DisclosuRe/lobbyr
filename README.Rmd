@@ -49,8 +49,8 @@ issue_joiner =  "or",
  client_name = "7 Eleven, Inc.",
   ending_date = "2025-1-25", # format yyyy-mm-dd
   starting_date = "2020-04-01", # format yyyy-mm-dd
-  tidy_result = T,
-  ignore_disclaimer = F
+  tidy_result = TRUE,
+  ignore_disclaimer = FALSE
 )
 
 # Flag and clean duplicate filings
@@ -117,7 +117,7 @@ dupes_flag_test <- flag_dupes(chamber_df, find_duplicates = TRUE, attempt_cleani
 #### Example
 
 ```{r flagged_conflict_example}
-flagged_conflict <- flag_client_registrant_conflict(chamber_df, flag_conflict = TRUE, clean_doublecounts = TRUE)
+flagged_and_clean_conflict <- flag_client_registrant_conflict(seven_eleven_filings, flag_conflict = TRUE, clean_doublecounts = TRUE)
 
 ```
 

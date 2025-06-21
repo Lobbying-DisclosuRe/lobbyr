@@ -39,22 +39,22 @@
 #'   ignore_disclaimer = FALSE
 #' )
 #'
-#' # Get a cleaner version of filings produced by the US Chamber of Commerce
+#' # Get a cleaner version of filings produced by the 7 Eleven and the lobbyists who 7 Eleven hired
 #' # that include ALL of the terms specified
-#' df <- get_filings(
-#'   issues = c("tax", "trade", "health"),
+#' cleaner_df <- get_filings(
+#'   issues = c("fees", "foods", "immigration"),
 #'   issue_joiner = "and",
-#'   client_name = "Chamber of Commerce of the U.S.A.",
-#'   registrant_name = "Chamber of Commerce of the U.S.A.",
+#'   client_name = "7 Eleven, Inc.",
 #'   tidy_result = TRUE,
 #'   ignore_disclaimer = FALSE
 #' )
+#'
 #'
 #' # Query filings for tax, company, or bill issues in the first quarter
 #' # for a specific client/registrant - NOTE: this probably won't yield much
 #' # in the way of results, but it uses every available parameter so you can
 #' # see how they're used.
-#' bigger_temp <- get_filings(
+#' df <- get_filings(
 #'   issues = c("tax", "company", "bill"),
 #'   issue_joiner = "or",
 #'   filing_period = "first_quarter",

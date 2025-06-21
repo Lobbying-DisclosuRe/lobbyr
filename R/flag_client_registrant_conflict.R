@@ -22,12 +22,16 @@
 #' @export
 #'
 #' @examples
+#'
 #' # Flag and clean potential double-counting cases
-#' flagged_conflict <- flag_client_registrant_conflict(bigger_temp, flag_conflict = TRUE, clean_doublecounts = TRUE)
+#'
+#' conflict_removed_and_flagged <- flag_client_registrant_conflict(cleaner_df, flag_conflict = TRUE, clean_doublecounts = TRUE)
 #'
 #' # Only flag, do not remove
-#' flagged_only <- flag_client_registrant_conflict(bigger_temp, flag_conflict = TRUE, clean_doublecounts = FALSE)
-#' @seealso [get_filings()] for retrieving lobbying data, [flag_dupes()] for identifying duplicate or amended filings.
+#'
+#' conflict_flagged_only <- flag_client_registrant_conflict(cleaner_df, flag_conflict = TRUE, clean_doublecounts = FALSE)
+#'
+#' @seealso [get_filings()] for retrieving lobbying data, and [flag_dupes] for identifying duplicate or amended filings.
 flag_client_registrant_conflict <- function(dataframe_that_i_determine, flag_conflict = TRUE, clean_doublecounts = TRUE) {
   if (flag_conflict) {
     #add cleaned rows I need later
@@ -60,7 +64,7 @@ flag_client_registrant_conflict <- function(dataframe_that_i_determine, flag_con
         )
       )
   }else {
-    flagged_cases <- return(dataframe_that_i_determine)
+    flagged_cases <- dataframe_that_i_determine
   }
   remove_client_registrant_conflict <- function(dataframe_i_cleaned_above) {
     no_client_registrant_conflict <- dataframe_i_cleaned_above |>
@@ -69,8 +73,8 @@ flag_client_registrant_conflict <- function(dataframe_that_i_determine, flag_con
   if (clean_doublecounts) {
     filtered_dataframe_with_flagged_conflict_col <- remove_client_registrant_conflict(flagged_cases)
   } else {
-    filtered_dataframe_with_flagged_conflict_col <- return(flagged_cases)
+    filtered_dataframe_with_flagged_conflict_col <- flagged_cases
   }
-  return(filtered_dataframe_with_flagged_conflict_col)
   message("This function either removed or identified lobbying filings that, if left in, could lead to doublecounting of spending on lobbying. It is not perfect. Please see documentation on tips for fact-checking these by hand.")
+  return(filtered_dataframe_with_flagged_conflict_col)
 }# end of function

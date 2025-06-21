@@ -16,13 +16,13 @@ Authors@R: c(
       role = c("aut", "ctb")
     )
   )
-Description: This package allows users to query the Senate federal lobbying 
+Description: lobbyR allows users to query the Senate federal lobbying 
     disclosures database <https://lda.senate.gov/api/redoc/v1/> to find out how 
-    much companies are spending to lobby the federal government. It allows for 
-    search terms such as keywords, time periods and company names. It then 
+    much companies and other entities are spending to lobby Congress and the federal government. It allows for 
+    search terms such as keywords, time periods and entity names. It then 
     attempts to clean, or at least flag, filings that could provide incorrect 
     results when seeking to answer the question: How much is being spent on 
-    lobbying our Congress and the administration?
+    lobbying our Congress and the administration and what issues do they care about?
 License: LGPL (>= 3)
 Encoding: UTF-8
 LazyData: true
