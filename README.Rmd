@@ -26,7 +26,7 @@ You can install the development version of lobbyR from [GitHub](https://github.c
 
 ``` r
 # install.packages("pak")
-pak::pak("https://github.com/Lobbying-DisclosuRe/lobbyr")
+devtools::install_github("Lobbying-DisclosuRe/lobbyr")
 ```
 
 ## Example
