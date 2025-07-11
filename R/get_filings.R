@@ -14,6 +14,8 @@
 #' @param registrant_name Optional. Filter results to filings for a specific registrant (lobbying firm or self-filer).
 #' @param starting_date Optional. A character string specifying the start date for the search (Format is - YYYY-MM-DD).
 #' @param ending_date Optional. A character string specifying the end date for the search (Format is - YYYY-MM-DD).
+#' @param    min_amount = Optional. A character string specifying the minimum lobbying amount spent
+#' @param     max_amount = Optional. A character string specifying the maximum lobbying amount spent
 #' @param tidy_result Optional. A logical value that if \code{TRUE} (default), returns a reduced, tidy data frame with key columns. If \code{FALSE}, returns all available columns from api query.
 #' @param ignore_disclaimer Optional. If \code{TRUE}, suppresses the printed disclaimer and guidance messages explaining the limitations of the data.
 #'
@@ -62,21 +64,26 @@
 #'   registrant_name = "Chamber of Commerce of the U.S.A.",
 #'   ending_date = "2025-01-25",
 #'   starting_date = "2021-04-01",
+#'    min_amount = "", ## min/max,
+#'     max_amount = ""  ## min/max,
 #'   tidy_result = TRUE,
 #'   ignore_disclaimer = TRUE
 #' )
 #' }
 #'@seealso [set_senate_api_key()] for entering and storing the disclosures api key, [flag_dupes()] for handling duplicate filings or amendments filed in the same quarter that can cause doublecounting, and [flag_client_registrant_conflict()] for methods to prevent doublecounting when entities that file lobbying disclosures as registrants, but pay outside lobbying firms too, also show up as clients.
-get_filings <- function(issues = c(""),
-                        issue_joiner = "",
-                        year = "",
-                        filing_period = "",
-                        client_name = "",
-                        registrant_name = "",
-                        starting_date = "",
-                        ending_date = "",
-                        tidy_result = TRUE,
-                        ignore_disclaimer = FALSE) {
+get_filings_new <- function(issues = c(""),
+                            issue_joiner = "",
+                            year = "",
+                            filing_period = "",
+                            client_name = "",
+                            registrant_name = "",
+                            starting_date = "",
+                            ending_date = "",
+                            tidy_result = TRUE,
+                            ignore_disclaimer = FALSE,
+                            min_amount = "", ## min/max
+                            max_amount = ""  ## min/max
+) {
   specific_issues <- function(lobbying_issues = "", join_word = "") {
     if (length(lobbying_issues) == 1 && grepl(",", lobbying_issues)) {
       lobbying_issues <- unlist(strsplit(lobbying_issues, ",\\s*"))
@@ -125,13 +132,13 @@ get_filings <- function(issues = c(""),
       filing_period = filing_period,
       client_name = client_name,
       filing_dt_posted_before = ending_date,
-      filing_dt_posted_after = starting_date
+      filing_dt_posted_after = starting_date,
+      filing_amount_reported_min = min_amount, ## min/max
+      filing_amount_reported_max = max_amount  ## min/max
     ) |>
     httr2::req_throttle(rate = 120 / 60)
 
-
   resps <- withCallingHandlers(
-    #with calling handlers used to throw a more verbose error on 404
     httr2::req_perform_iterative(
       req |> httr2::req_url_query(page_size = 25),
       next_req = httr2::iterate_with_offset(
@@ -161,9 +168,6 @@ get_filings <- function(issues = c(""),
       rlang::abort("unsupported HTTP method. A more detailed error is possible by wrapping your get_filings() query thustly: 'httr2::with_verbosity(get_filings(add your arguments), verbosity = 2)' For more common issues visit https://lda.senate.gov/api/redoc/v1/#section/Common-Errors", parent = cnd)
     }
   )
-  # readr::write_rds(resps, "resps_request_result.rds") # this can be utilized to save the results locally. Turned off, unless needed
-
-  #take response and unpack, clean it up
 
   unpackedhopeitworks <- resps |>
     httr2::resps_successes() |>
@@ -192,22 +196,21 @@ get_filings <- function(issues = c(""),
   cleaned_data_to_work_with <- cleaner_view(data_to_work_with, tidy_up_response = tidy_result)
   ignore_message <- function(mute_message = FALSE) {
     if (mute_message == FALSE) {
-      message("DISCLAIMER: This data is known to contain errors and requires additional filtering and cleaning to ensure correct results.")
-      message("See documentation for more guidance and filtering examples.")
-      message()
-      message("FACT CHECKING:")
-      message("+If you're looking to fact-check, use the filing document url to look at the source of the information as it was filed.")
-      message("+Ensure that there is only one filing for a given registrant in each filing_period for each year to avoid double counting the amount spent or earned on lobbying.")
-      message()
-      message("DOUBLE COUNTING:")
-      message("If, for example, in the same quarter of a year an entity has a filing called '1st Quarter - Report', '1st Quarter - Termination' and '1st Quarter - Amendment', you must make sure to only count one of those (the latest is usually the most accurate) otherwise you risk double counting.")
-      message("+The helper column called, 'double count risk' should have insights into some of these instances, but it's not perfect. So, double check.")
-      message("+Registrations and terminations are separate from quarterly lobby spending and must be filtered out to determine an entity's yearly spending on lobbying.")
-      message()
-      message("MORE HELPFUL HINTS:")
-      message("+If an entity name appears as a registrant, but also appears as a client. Do not sum the values. Instead, use the value in the registrant's expenses field to gauge the amount spent on lobbying by the registrant.")
-      message()
-      message("SOURCE: Federal lobbying disclosures maintained in the U.S. Senate Lobbying Disclosure Act Database and queried through the official Lobbying Disclosure REST API v1 - Read more here - https://lda.senate.gov/api/redoc/v1/")
+      message(
+        "DISCLAIMER: This data is known to contain errors and requires additional filtering and cleaning to ensure correct results.\n
+See documentation for more guidance and filtering examples.\n
+FACT CHECKING:\n
++If you're looking to fact-check, use the filing document url to look at the source of the information as it was filed.\n
++Ensure that there is only one filing for a given registrant in each filing_period for each year to avoid double counting the amount spent or earned on lobbying.\n
+DOUBLE COUNTING:\n
+If, for example, in the same quarter of a year an entity has a filing called '1st Quarter - Report', '1st Quarter - Termination' and '1st Quarter - Amendment', you must make sure to only count one of those (the latest is usually the most accurate) otherwise you risk double counting.\n
++The helper column called, 'double count risk' should have insights into some of these instances, but it's not perfect. So, double check.\n
++Registrations and terminations are separate from quarterly lobby spending and must be filtered out to determine an entity's yearly spending on lobbying.\n
+MORE HELPFUL HINTS:\n
++If an entity name appears as a registrant, but also appears as a client. Do not sum the values. Instead, use the value in the registrant's expenses field to gauge the amount spent on lobbying by the registrant.\n
+SOURCE: Federal lobbying disclosures maintained in the U.S. Senate Lobbying Disclosure Act Database and queried through the official Lobbying Disclosure REST API v1 - Read more here - https://lda.senate.gov/api/redoc/v1/"
+      )
+
     } else {
       message("Disclaimer is muted. But you should read it, and can do that by removing ignore_disclaimer = TRUE from DisclosuR call")
     }
