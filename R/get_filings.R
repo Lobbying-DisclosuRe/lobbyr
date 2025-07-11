@@ -71,7 +71,7 @@
 #' )
 #' }
 #'@seealso [set_senate_api_key()] for entering and storing the disclosures api key, [flag_dupes()] for handling duplicate filings or amendments filed in the same quarter that can cause doublecounting, and [flag_client_registrant_conflict()] for methods to prevent doublecounting when entities that file lobbying disclosures as registrants, but pay outside lobbying firms too, also show up as clients.
-get_filings_new <- function(issues = c(""),
+get_filings <- function(issues = c(""),
                             issue_joiner = "",
                             year = "",
                             filing_period = "",
