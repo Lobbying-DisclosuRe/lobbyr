@@ -16,16 +16,19 @@ knitr::opts_chunk$set(
 # lobbyR
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 The goal of lobbyR is to provide a suite of tools for querying, cleaning, and analyzing U.S. Senate Lobbying Disclosure Act (LDA) data via the official REST API. It is designed for journalists, researchers, and transparency advocates who want to explore federal lobbying disclosures in a reproducible and programmatic way. The package includes helpers for searching by issue, client, registrant, and date, as well as for flagging duplicates, identifying client-registrant conflicts, and securely storing your API key.
 
-## Installation
+### [Click this to watch a video that walks you through the example](https://www.loom.com/share/7b96e863438b4d8fb220739b868c48aa?sid=a93a57dd-c82a-4472-97fd-5c50ddc163ee)
+
+### Installation
 
 You can install the development version of lobbyR from [GitHub](https://github.com/Lobbying-DisclosuRe/lobbyr) with:
 
 ``` r
-# install.packages("pak")
+# install.packages("devtools")
 devtools::install_github("Lobbying-DisclosuRe/lobbyr")
 ```
 
@@ -65,14 +68,12 @@ flagged_conflict <- flag_client_registrant_conflict(seven_eleven_filings, flag_c
 
 ### `get_filings()`
 
-- Query the U.S. Senate LDA API for lobbying filings.
-- Search by issue(s), client, registrant, filing period, and date range.
-- Returns a cleaned and optionally tidied data frame.
-- Includes a detailed disclaimer and fact-checking guidance.
-
+-   Query the U.S. Senate LDA API for lobbying filings.
+-   Search by issue(s), client, registrant, filing period, and date range.
+-   Returns a cleaned and optionally tidied data frame.
+-   Includes a detailed disclaimer and fact-checking guidance.
 
 #### Example
-
 
 ```{r get_filings_example}
 
@@ -91,13 +92,11 @@ chamber_df <- get_filings(
 
 ```
 
-
 ### `flag_dupes()`
 
-- Flags filings that may be duplicates, amendments, or otherwise dubious.
-- Adds diagnostic columns to help identify problematic filings.
-- Optionally removes all but the latest filing for each registrant-client-quarter group.
-
+-   Flags filings that may be duplicates, amendments, or otherwise dubious.
+-   Adds diagnostic columns to help identify problematic filings.
+-   Optionally removes all but the latest filing for each registrant-client-quarter group.
 
 #### Example
 
@@ -106,13 +105,10 @@ dupes_flag_test <- flag_dupes(chamber_df, find_duplicates = TRUE, attempt_cleani
 
 ```
 
-
-
 ### `flag_client_registrant_conflict()`
 
-- Flags and (optionally) removes filings that could result in double-counting, such as when an entity files as both registrant and client.
-- Adds a flag column indicating which filings are likely to be duplicates.
-
+-   Flags and (optionally) removes filings that could result in double-counting, such as when an entity files as both registrant and client.
+-   Adds a flag column indicating which filings are likely to be duplicates.
 
 #### Example
 
@@ -121,12 +117,10 @@ flagged_and_clean_conflict <- flag_client_registrant_conflict(seven_eleven_filin
 
 ```
 
-
 ### `set_senate_api_key()`
 
-- Securely store your U.S. Senate LDA API key using the `keyring` package.
-- Prompts you to enter your key, which is then used by `get_filings()`.
-
+-   Securely store your U.S. Senate LDA API key using the `keyring` package.
+-   Prompts you to enter your key, which is then used by `get_filings()`.
 
 #### Example
 
@@ -136,68 +130,70 @@ flagged_and_clean_conflict <- flag_client_registrant_conflict(seven_eleven_filin
 
 ```
 
----
+------------------------------------------------------------------------
 
 ## Data Cleaning and Best Practices
 
-- Always review flagged filings and potential double-counts by hand for critical analyses. There's lots of cases that don't get caught, unfortunately. For instance the 7 Eleven filing was spelled three different ways - "7-ELEVEN, INC", 	"7 ELEVEN, INC." and "7-ELEVEN, INC." 
-- Use the `checkme` and `flag` columns to guide manual review. But there's always other cases. Feel free to flag and report them to me. 
-- Only sum lobbying expenses for a registrant once per quarter/year to avoid double-counting.
-- Consult the filing document URL for source verification.
+-   Always review flagged filings and potential double-counts by hand for critical analyses. There's lots of cases that don't get caught, unfortunately. For instance the 7 Eleven filing was spelled three different ways - "7-ELEVEN, INC", "7 ELEVEN, INC." and "7-ELEVEN, INC."
+-   Use the `checkme` and `flag` columns to guide manual review. But there's always other cases. Feel free to flag and report them to me.
+-   Only sum lobbying expenses for a registrant once per quarter/year to avoid double-counting.
+-   Consult the filing document URL for source verification.
 
----
+------------------------------------------------------------------------
 
 ## Disclaimer
 
 > This data is known to contain errors and requires additional filtering and cleaning to ensure correct results. See documentation for more guidance and filtering examples. If you're looking to fact-check, use the filing document URL to review the source. Registrations and terminations are separate from quarterly lobby spending and must be filtered out to determine an entity's yearly spending on lobbying. If an entity appears as both registrant and client, do not sum the values; instead, use the registrant's expenses field to gauge total lobbying spend.
 
----
+------------------------------------------------------------------------
 
 ## API Key
 
-- API keys can be requested at: https://lda.senate.gov/api/register/
-- Store your key securely with `set_senate_api_key()`.
+-   API keys can be requested at: <https://lda.senate.gov/api/register/>
+-   Store your key securely with `set_senate_api_key()`.
 
----
+------------------------------------------------------------------------
 
 ## Dependencies
 
-- `httr2`
-- `dplyr`
-- `tidyr`
-- `stringr`
-- `keyring`
-- `readr`
-- `purrr`
+-   `httr2`
+-   `dplyr`
+-   `tidyr`
+-   `stringr`
+-   `keyring`
+-   `readr`
+-   `purrr`
 
----
+------------------------------------------------------------------------
 
 ## License
 
 GNU LGPLv3
 
----
+------------------------------------------------------------------------
 
 ## Contributing
 
 Pull requests and issues are welcome. Please see the repository for guidelines.
 
----
+------------------------------------------------------------------------
 
 ## Citation
-Working on this still
-If you use this package in your research or reporting, please cite the data from the U.S. Senate Lobbying Disclosure Act Database and this package.
 
----
+Working on this still If you use this package in your research or reporting, please cite the data from the U.S. Senate Lobbying Disclosure Act Database and this package.
+
+------------------------------------------------------------------------
 
 ## Contact
 
-This package was developed by Chris Cioffi. For questions, issues, or suggestions, please visit: https://github.com/Lobbying-DisclosuRe/lobbyr
+This package was developed by Chris Cioffi. For questions, issues, or suggestions, please visit: <https://github.com/Lobbying-DisclosuRe/lobbyr>
 
----
+------------------------------------------------------------------------
 
 ## Acknowledgments
 
 Thanks to the U.S. Congress for providing open data and the guidance of American University's Aarushi Sahejpal. Thanks to AI tools and the R community for help and how-tos in creating some regexes and code patterns.
 
-<div style="text-align: center">⁂</div>
+::: {style="text-align: center"}
+⁂
+:::

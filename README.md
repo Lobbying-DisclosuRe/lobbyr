@@ -16,7 +16,9 @@ helpers for searching by issue, client, registrant, and date, as well as
 for flagging duplicates, identifying client-registrant conflicts, and
 securely storing your API key.
 
-## Installation
+### [Click this to watch a video that walks you through the example](https://www.loom.com/share/7b96e863438b4d8fb220739b868c48aa?sid=a93a57dd-c82a-4472-97fd-5c50ddc163ee)
+
+### Installation
 
 You can install the development version of lobbyR from
 [GitHub](https://github.com/Lobbying-DisclosuRe/lobbyr) with:
@@ -49,19 +51,26 @@ issue_joiner =  "or",
   tidy_result = TRUE,
   ignore_disclaimer = FALSE
 )
-#> Iterating ■■■■■■■■■                         25% | ETA:  3sIterating ■■■■■■■■■■■■■■■■                  50% | ETA:  2sIterating ■■■■■■■■■■■■■■■■■■■■■■■           75% | ETA:  1s                                                           DISCLAIMER: This data is known to contain errors and requires additional filtering and cleaning to ensure correct results.
+#> Iterating ■■■■■■■■■■■■■■■■                  50% | ETA:  2sIterating ■■■■■■■■■■■■■■■■■■■■■■■           75% | ETA:  1s                                                           DISCLAIMER: This data is known to contain errors and requires additional filtering and cleaning to ensure correct results.
+#> 
 #> See documentation for more guidance and filtering examples.
 #> 
 #> FACT CHECKING:
+#> 
 #> +If you're looking to fact-check, use the filing document url to look at the source of the information as it was filed.
+#> 
 #> +Ensure that there is only one filing for a given registrant in each filing_period for each year to avoid double counting the amount spent or earned on lobbying.
 #> 
 #> DOUBLE COUNTING:
+#> 
 #> If, for example, in the same quarter of a year an entity has a filing called '1st Quarter - Report', '1st Quarter - Termination' and '1st Quarter - Amendment', you must make sure to only count one of those (the latest is usually the most accurate) otherwise you risk double counting.
+#> 
 #> +The helper column called, 'double count risk' should have insights into some of these instances, but it's not perfect. So, double check.
+#> 
 #> +Registrations and terminations are separate from quarterly lobby spending and must be filtered out to determine an entity's yearly spending on lobbying.
 #> 
 #> MORE HELPFUL HINTS:
+#> 
 #> +If an entity name appears as a registrant, but also appears as a client. Do not sum the values. Instead, use the value in the registrant's expenses field to gauge the amount spent on lobbying by the registrant.
 #> 
 #> SOURCE: Federal lobbying disclosures maintained in the U.S. Senate Lobbying Disclosure Act Database and queried through the official Lobbying Disclosure REST API v1 - Read more here - https://lda.senate.gov/api/redoc/v1/
@@ -99,7 +108,7 @@ chamber_df <- get_filings(
   tidy_result = TRUE,
   ignore_disclaimer = TRUE
 )
-#> ⠙ Iterating 1 done (0.31/s) | 3.2sIterating ■■■■■                             14% | ETA: 20sIterating ■■■■■■■■■■                        29% | ETA: 15sIterating ■■■■■■■■■■■■■■                    43% | ETA: 12sIterating ■■■■■■■■■■■■■■■■■■                57% | ETA:  9sIterating ■■■■■■■■■■■■■■■■■■■■■■            71% | ETA:  6sIterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■       86% | ETA:  3s                                                           Disclaimer is muted. But you should read it, and can do that by removing ignore_disclaimer = TRUE from DisclosuR call
+#> ⠙ Iterating 1 done (0.45/s) | 2.2sIterating ■■■■■                             14% | ETA: 15sIterating ■■■■■■■■■■                        29% | ETA: 13sIterating ■■■■■■■■■■■■■■                    43% | ETA: 12sIterating ■■■■■■■■■■■■■■■■■■                57% | ETA:  8sIterating ■■■■■■■■■■■■■■■■■■■■■■            71% | ETA:  5sIterating ■■■■■■■■■■■■■■■■■■■■■■■■■■■       86% | ETA:  3s                                                           Disclaimer is muted. But you should read it, and can do that by removing ignore_disclaimer = TRUE from DisclosuR call
 ```
 
 ### `flag_dupes()`
