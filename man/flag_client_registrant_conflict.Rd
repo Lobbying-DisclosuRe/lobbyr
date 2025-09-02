@@ -34,14 +34,13 @@ The function adds a flag column to the data frame, indicating whether each filin
 Note: This function is not perfect and may miss some edge cases. Manual review is recommended for critical analyses.
 }
 \examples{
-
+\dontrun{
 # Flag and clean potential double-counting cases
-
 conflict_removed_and_flagged <- flag_client_registrant_conflict(cleaner_df, flag_conflict = TRUE, clean_doublecounts = TRUE)
 
 # Only flag, do not remove
-
 conflict_flagged_only <- flag_client_registrant_conflict(cleaner_df, flag_conflict = TRUE, clean_doublecounts = FALSE)
+}
 
 }
 \seealso{

@@ -14,7 +14,9 @@ get_filings(
   starting_date = "",
   ending_date = "",
   tidy_result = TRUE,
-  ignore_disclaimer = FALSE
+  ignore_disclaimer = FALSE,
+  min_amount = "",
+  max_amount = ""
 )
 }
 \arguments{
@@ -37,6 +39,10 @@ get_filings(
 \item{tidy_result}{Optional. A logical value that if \code{TRUE} (default), returns a reduced, tidy data frame with key columns. If \code{FALSE}, returns all available columns from api query.}
 
 \item{ignore_disclaimer}{Optional. If \code{TRUE}, suppresses the printed disclaimer and guidance messages explaining the limitations of the data.}
+
+\item{min_amount}{Optional. A character string specifying the minimum lobbying amount spent.}
+
+\item{max_amount}{Optional. A character string specifying the maximum lobbying amount spent.}
 }
 \value{
 A data frame of lobbying filings matching the query, with lobbying activities unnested and issues as columns. If \code{tidy_result = TRUE}, the data frame is reduced to key columns.
@@ -89,6 +95,8 @@ df <- get_filings(
   registrant_name = "Chamber of Commerce of the U.S.A.",
   ending_date = "2025-01-25",
   starting_date = "2021-04-01",
+   min_amount = "", ## min/max,
+    max_amount = ""  ## min/max,
   tidy_result = TRUE,
   ignore_disclaimer = TRUE
 )

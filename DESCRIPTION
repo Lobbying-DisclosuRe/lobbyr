@@ -26,21 +26,14 @@ Description: Giving users seeking federal lobbying disclosures an easier way to 
     issues do they care about?
 License: LGPL (>= 3)
 Encoding: UTF-8
-LazyData: true
 Suggests: 
     spelling
 Language: en-US
 Imports: 
-    cli,
     dplyr,
-    glue,
     httr2,
     keyring,
-    lifecycle,
-    purrr,
-    readr,
     rlang,
     stringr,
-    tidyr,
-    withr
+    tidyr
 RoxygenNote: 7.3.2

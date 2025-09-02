@@ -1,0 +1,26 @@
+# Suppress R CMD check notes about global variables
+utils::globalVariables(c(
+  "client.name",
+  "client_clean", 
+  "desc",
+  "description",
+  "dt_posted",
+  "entity",
+  "expenses",
+  "filing_period",
+  "filing_type",
+  "filing_year",
+  "flag",
+  "general_issue_code_display",
+  "has_amendment",
+  "has_quarter",
+  "income",
+  "is_amendment",
+  "is_duplicate",
+  "lobbying_activities",
+  "quarter_number",
+  "registrant.name",
+  "registrant_clean",
+  "registration_or_termination",
+  "registration_termination"
+))

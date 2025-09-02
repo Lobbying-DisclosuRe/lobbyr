@@ -14,8 +14,8 @@
 #' @param registrant_name Optional. Filter results to filings for a specific registrant (lobbying firm or self-filer).
 #' @param starting_date Optional. A character string specifying the start date for the search (Format is - YYYY-MM-DD).
 #' @param ending_date Optional. A character string specifying the end date for the search (Format is - YYYY-MM-DD).
-#' @param    min_amount = Optional. A character string specifying the minimum lobbying amount spent
-#' @param     max_amount = Optional. A character string specifying the maximum lobbying amount spent
+#' @param min_amount Optional. A character string specifying the minimum lobbying amount spent.
+#' @param max_amount Optional. A character string specifying the maximum lobbying amount spent.
 #' @param tidy_result Optional. A logical value that if \code{TRUE} (default), returns a reduced, tidy data frame with key columns. If \code{FALSE}, returns all available columns from api query.
 #' @param ignore_disclaimer Optional. If \code{TRUE}, suppresses the printed disclaimer and guidance messages explaining the limitations of the data.
 #'

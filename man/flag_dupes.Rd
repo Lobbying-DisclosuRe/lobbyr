@@ -38,14 +38,13 @@ The function creates several columns to help identify filings that may be of con
 If \code{attempt_cleaning = TRUE}, the function keeps only the latest filing (by \code{dt_posted}) for each registrant, client, year, and filing period, after removing registration and termination filings.
 }
 \examples{
-
+\dontrun{
 # Flag and clean duplicate filings in a lobbying data frame
-
 dupes_flag_test <- flag_dupes(df, find_duplicates = TRUE, attempt_cleaning = TRUE)
 
 # Only flag, do not remove duplicates
-
 flagged_only <- flag_dupes(df, find_duplicates = TRUE, attempt_cleaning = FALSE)
+}
 
 }
 \seealso{

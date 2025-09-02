@@ -24,14 +24,13 @@
 #' @returns A data frame with additional columns indicating potential issues, and (optionally) with duplicate filings removed.
 #' @export
 #' @examples
-#'
+#' \dontrun{
 #' # Flag and clean duplicate filings in a lobbying data frame
-#'
 #' dupes_flag_test <- flag_dupes(df, find_duplicates = TRUE, attempt_cleaning = TRUE)
 #'
 #' # Only flag, do not remove duplicates
-#'
 #' flagged_only <- flag_dupes(df, find_duplicates = TRUE, attempt_cleaning = FALSE)
+#' }
 #'
 #' @seealso [get_filings()] for retrieving data from the API, and [flag_client_registrant_conflict] for methods to prevent doublecounting when entities that file lobbying disclosures as registrants, but pay outside lobbying firms too, also show up as clients.
 flag_dupes <- function(cleaned_dataframe_from_previous_function, find_duplicates = TRUE, attempt_cleaning = TRUE) {
@@ -63,7 +62,7 @@ flag_dupes <- function(cleaned_dataframe_from_previous_function, find_duplicates
       dplyr::filter(!registration_or_termination) |>
       dplyr::mutate(dt_posted = as.POSIXct(dt_posted)) |>
       dplyr::group_by(registrant.name, client.name, filing_year, filing_period) |>
-      dplyr::arrange(desc(dt_posted)) |>
+      dplyr::arrange(dplyr::desc(dt_posted)) |>
       dplyr::slice_tail(n = 1) |>
       dplyr::ungroup()
   }

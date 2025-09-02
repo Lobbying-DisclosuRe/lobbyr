@@ -22,14 +22,13 @@
 #' @export
 #'
 #' @examples
-#'
+#' \dontrun{
 #' # Flag and clean potential double-counting cases
-#'
 #' conflict_removed_and_flagged <- flag_client_registrant_conflict(cleaner_df, flag_conflict = TRUE, clean_doublecounts = TRUE)
 #'
 #' # Only flag, do not remove
-#'
 #' conflict_flagged_only <- flag_client_registrant_conflict(cleaner_df, flag_conflict = TRUE, clean_doublecounts = FALSE)
+#' }
 #'
 #' @seealso [get_filings()] for retrieving lobbying data, and [flag_dupes] for identifying duplicate or amended filings.
 flag_client_registrant_conflict <- function(dataframe_that_i_determine, flag_conflict = TRUE, clean_doublecounts = TRUE) {
