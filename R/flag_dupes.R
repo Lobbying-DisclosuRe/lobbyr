@@ -26,18 +26,10 @@
 #' @examples
 #' \dontrun{
 #' # Flag and clean duplicate filings in a lobbying data frame
-#' dupes_flag_test <- flag_dupes(
-#'   df, 
-#'   find_duplicates = TRUE, 
-#'   attempt_cleaning = TRUE
-#' )
+#' dupes_flag_test <- flag_dupes(df, find_duplicates = TRUE, attempt_cleaning = TRUE)
 #'
 #' # Only flag, do not remove duplicates
-#' flagged_only <- flag_dupes(
-#'   df, 
-#'   find_duplicates = TRUE, 
-#'   attempt_cleaning = FALSE
-#' )
+#' flagged_only <- flag_dupes(df, find_duplicates = TRUE, attempt_cleaning = FALSE)
 #' }
 #'
 #' @seealso [get_filings()] for retrieving data from the API, and [flag_client_registrant_conflict] for methods to prevent doublecounting when entities that file lobbying disclosures as registrants, but pay outside lobbying firms too, also show up as clients.
