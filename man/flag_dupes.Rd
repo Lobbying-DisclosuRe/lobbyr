@@ -40,10 +40,18 @@ If \code{attempt_cleaning = TRUE}, the function keeps only the latest filing (by
 \examples{
 \dontrun{
 # Flag and clean duplicate filings in a lobbying data frame
-dupes_flag_test <- flag_dupes(df, find_duplicates = TRUE, attempt_cleaning = TRUE)
+dupes_flag_test <- flag_dupes(
+  df, 
+  find_duplicates = TRUE, 
+  attempt_cleaning = TRUE
+)
 
 # Only flag, do not remove duplicates
-flagged_only <- flag_dupes(df, find_duplicates = TRUE, attempt_cleaning = FALSE)
+flagged_only <- flag_dupes(
+  df, 
+  find_duplicates = TRUE, 
+  attempt_cleaning = FALSE
+)
 }
 
 }

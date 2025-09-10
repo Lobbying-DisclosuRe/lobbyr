@@ -36,10 +36,18 @@ Note: This function is not perfect and may miss some edge cases. Manual review i
 \examples{
 \dontrun{
 # Flag and clean potential double-counting cases
-conflict_removed_and_flagged <- flag_client_registrant_conflict(cleaner_df, flag_conflict = TRUE, clean_doublecounts = TRUE)
+conflict_removed_and_flagged <- flag_client_registrant_conflict(
+  cleaner_df, 
+  flag_conflict = TRUE, 
+  clean_doublecounts = TRUE
+)
 
 # Only flag, do not remove
-conflict_flagged_only <- flag_client_registrant_conflict(cleaner_df, flag_conflict = TRUE, clean_doublecounts = FALSE)
+conflict_flagged_only <- flag_client_registrant_conflict(
+  cleaner_df, 
+  flag_conflict = TRUE, 
+  clean_doublecounts = FALSE
+)
 }
 
 }

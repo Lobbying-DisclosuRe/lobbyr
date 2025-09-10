@@ -1,0 +1,35 @@
+Package: lobbyR
+Type: Package
+Title: Functions to Get Federal Lobbying Disclosures
+Version: 0.1.0
+Author: Chris Cioffi [aut, cre], Aarushi Sahejpal [aut, ctb]
+Maintainer: Chris Cioffi <chrisjcioffi@gmail.com>
+Authors@R: c(
+    person(
+      "Chris", "Cioffi",
+      email = "chrisjcioffi@gmail.com",
+      role = c("aut", "cre")
+    ),
+    person(
+      "Aarushi", "Sahejpal",
+      email = "aarushisahejpal@gmail.com",
+      role = c("aut", "ctb")
+    )
+  )
+Description: This package allows users to query the Senate federal lobbying 
+    disclosures database <https://lda.senate.gov/api/redoc/v1/> to find out how 
+    much companies are spending to lobby the federal government. It allows for 
+    search terms such as keywords, time periods and company names. It then 
+    attempts to clean, or at least flag, filings that could provide incorrect 
+    results when seeking to answer the question: How much is being spent on 
+    lobbying our Congress and the administration?
+License: LGPL (>= 3)
+Encoding: UTF-8
+Suggests: spelling
+Language: en-US
+Imports: cli, dplyr, glue, httr2, keyring, lifecycle, purrr, readr,
+        rlang, stringr, tidyr, withr
+RoxygenNote: 7.3.2
+NeedsCompilation: no
+Packaged: 2025-06-20 15:54:50 UTC; aarushisahejpal
+Built: R 4.3.2; ; 2025-06-20 15:55:16 UTC; unix

@@ -1,0 +1,7 @@
+flag_client_registrant_conflict
+                        Identify and Resolve Potential Double-Counting
+                        of Client/Registrant
+flag_dupes              Flag and Clean Duplicate or Dubious Lobbying
+                        Filings
+get_filings             Query Federal Lobbying Disclosures
+set_senate_api_key      Set and Store Disclosure API Key

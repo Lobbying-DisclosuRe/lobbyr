@@ -4,3 +4,9 @@
 ^README\.Rmd$
 ^CRAN-SUBMISSION$
 ^cran-comments\.md$
+^\.git$
+^\.github$
+^lobbyR_shiny_app$
+^.*\.Rcheck$
+^.*\.tar\.gz$
+^\.DS_Store$
