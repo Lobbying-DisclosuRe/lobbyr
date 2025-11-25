@@ -30,19 +30,30 @@
 #'
 #' @export
 #' @examples
+#' # Example function calls (require API key - see set_senate_api_key())
+#' 
+#' # Basic parameter validation (executable)
+#' tryCatch({
+#'   get_filings(issues = c("tax"), year = "invalid_year", ignore_disclaimer = TRUE)
+#' }, error = function(e) {
+#'   message("Expected error for invalid parameters")
+#' })
+#'
 #' \dontrun{
+#' # First, set your API key:
+#' set_senate_api_key()
+#'
 #' # Get raw third quarter filings that include any of the terms "tax", "trade", "health"
 #' df <- get_filings(
 #'   issues = c("tax", "trade", "health"),
 #'   issue_joiner = "or",
-#'   year = 2024, # can be used for only one year at a time
+#'   year = 2024,
 #'   filing_period = "third_quarter",
 #'   tidy_result = FALSE,
 #'   ignore_disclaimer = FALSE
 #' )
 #'
-#' # Get a cleaner version of filings produced by the 7 Eleven and the lobbyists who 7 Eleven hired
-#' # that include ALL of the terms specified
+#' # Get a cleaner version of filings for a specific client
 #' cleaner_df <- get_filings(
 #'   issues = c("fees", "foods", "immigration"),
 #'   issue_joiner = "and",
@@ -51,11 +62,7 @@
 #'   ignore_disclaimer = FALSE
 #' )
 #'
-#'
-#' # Query filings for tax, company, or bill issues in the first quarter
-#' # for a specific client/registrant - NOTE: this probably won't yield much
-#' # in the way of results, but it uses every available parameter so you can
-#' # see how they're used.
+#' # Query filings for specific issues and client/registrant
 #' df <- get_filings(
 #'   issues = c("tax", "company", "bill"),
 #'   issue_joiner = "or",
@@ -64,8 +71,8 @@
 #'   registrant_name = "Chamber of Commerce of the U.S.A.",
 #'   ending_date = "2025-01-25",
 #'   starting_date = "2021-04-01",
-#'    min_amount = "", ## min/max,
-#'     max_amount = ""  ## min/max,
+#'   min_amount = "",
+#'   max_amount = "",
 #'   tidy_result = TRUE,
 #'   ignore_disclaimer = TRUE
 #' )

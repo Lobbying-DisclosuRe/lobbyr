@@ -4,9 +4,9 @@
 \name{lobbyR-package}
 \alias{lobbyR}
 \alias{lobbyR-package}
-\title{lobbyR: Functions to Get Federal Lobbying Disclosures}
+\title{lobbyR: Get Federal Lobbying Disclosures}
 \description{
-Giving users seeking federal lobbying disclosures an easier way to query the API maintained by the Senate federal lobbying disclosures database \url{https://lda.senate.gov/api/redoc/v1/} to find out how much companies and other entities are spending to lobby Congress and the federal government. It allows for search terms such as keywords, time periods and entity names. It then attempts to clean, or at least flag, filings that could provide incorrect results when seeking to answer the question: How much is being spent on lobbying our Congress and the administration and what issues do they care about?
+Gives users seeking federal lobbying disclosures an easier way to query the API maintained by the Senate federal lobbying disclosures database \url{https://lda.senate.gov/api/redoc/v1/} to find out how much companies and other entities are spending to lobby Congress and the federal government. It allows for search terms such as keywords, time periods and entity names. It then attempts to clean, or at least flag, filings that could provide incorrect results when seeking to answer the question: How much is being spent on lobbying our Congress and the administration and what issues do they care about?
 }
 \author{
 \strong{Maintainer}: Chris Cioffi \email{chrisjcioffi@gmail.com}

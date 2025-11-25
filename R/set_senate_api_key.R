@@ -14,12 +14,17 @@
 #' @export
 #'
 #' @examples
+#' # Simple validation test (executable)
+#' if (is.function(set_senate_api_key)) {
+#'   message("Function is available")
+#' }
+#' 
 #' \dontrun{
 #' # Set or update the API key (prompts user for input)
 #' set_senate_api_key()
 #'
 #' # Set the API key directly (not recommended for interactive use)
-#' # set_senate_api_key("your_api_key_here")
+#' set_senate_api_key("your_api_key_here")
 #' }
 #'
 #' @seealso [keyring::key_set()] for secure key storage, and [get_filings()] for using the stored API key.
