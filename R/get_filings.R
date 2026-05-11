@@ -126,7 +126,7 @@ get_filings <- function(issues = c(""),
   }
   api_key <- get_api_key()
 
-  base_url <- "https://lda.senate.gov"
+  base_url <- "https://lda.gov"  #5/11/2026 changed lda url from https://lda.senate.gov to "ttps://lda.gov to reflect changes to the https://lda.gov/api/redoc/v1/ api that the senate is being depreciated
   filings <- "api/v1/filings/"
 
   req <- httr2::request(base_url) |>
