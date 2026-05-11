@@ -48,7 +48,7 @@ get_filings(
 A data frame of lobbying filings matching the query, with lobbying activities unnested and issues as columns. If \code{tidy_result = TRUE}, the data frame is reduced to key columns.
 }
 \description{
-'get_filings()' allows users to search the Senate federal lobbying disclosures database (https://lda.senate.gov/api/redoc/v1/)
+'get_filings()' allows users to search the Senate federal lobbying disclosures database (https://lda.gov/api/redoc/v1/)
 to ascertain much companies are spending to lobby the federal government or how much lobbyists are being paid on behalf of clients
 to lobby on various issues. The query searches based on various criteria including issues, filing periods, client names, registrant
  names, and dates.
@@ -63,12 +63,14 @@ A disclaimer message is printed by default, reminding users to fact-check result
 \examples{
 # Example function calls (require API key - see set_senate_api_key())
 
-# Basic parameter validation (executable)
+\donttest{
+# Basic parameter validation
 tryCatch({
   get_filings(issues = c("tax"), year = "invalid_year", ignore_disclaimer = TRUE)
 }, error = function(e) {
   message("Expected error for invalid parameters")
 })
+}
 
 \dontrun{
 # First, set your API key:

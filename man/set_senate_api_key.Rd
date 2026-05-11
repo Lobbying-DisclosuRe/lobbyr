@@ -18,7 +18,7 @@ Prompts the user to enter their U.S. Senate Lobbying Disclosure API key and secu
 \details{
 This function uses \code{keyring::key_set()} to securely store the API key under the name "senate_api_key". The function pauses briefly to allow the user to read instructions before prompting for input.
 
-#' API keys can be requested at: \url{https://lda.senate.gov/api/register/}
+#' API keys can be requested at: \url{https://lda.gov/api/register/}
 }
 \examples{
 # Simple validation test (executable)

@@ -32,12 +32,14 @@
 #' @examples
 #' # Example function calls (require API key - see set_senate_api_key())
 #' 
-#' # Basic parameter validation (executable)
+#' \donttest{
+#' # Basic parameter validation
 #' tryCatch({
 #'   get_filings(issues = c("tax"), year = "invalid_year", ignore_disclaimer = TRUE)
 #' }, error = function(e) {
 #'   message("Expected error for invalid parameters")
 #' })
+#' }
 #'
 #' \dontrun{
 #' # First, set your API key:
@@ -126,7 +128,7 @@ get_filings <- function(issues = c(""),
   }
   api_key <- get_api_key()
 
-  base_url <- "https://lda.gov"  #5/11/2026 changed lda url from https://lda.gov to "ttps://lda.gov to reflect changes to the https://lda.gov/api/redoc/v1/ api that the senate is being depreciated
+  base_url <- "https://lda.gov"  # updated from https://lda.senate.gov per API deprecation notice
   filings <- "api/v1/filings/"
 
   req <- httr2::request(base_url) |>
