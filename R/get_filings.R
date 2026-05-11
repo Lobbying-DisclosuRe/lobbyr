@@ -1,7 +1,7 @@
 #'  Query Federal Lobbying Disclosures
 #'
 #' @description
-#' 'get_filings()' allows users to search the Senate federal lobbying disclosures database (https://lda.senate.gov/api/redoc/v1/)
+#' 'get_filings()' allows users to search the Senate federal lobbying disclosures database (https://lda.gov/api/redoc/v1/)
 #' to ascertain much companies are spending to lobby the federal government or how much lobbyists are being paid on behalf of clients
 #' to lobby on various issues. The query searches based on various criteria including issues, filing periods, client names, registrant
 #'  names, and dates.
@@ -126,7 +126,7 @@ get_filings <- function(issues = c(""),
   }
   api_key <- get_api_key()
 
-  base_url <- "https://lda.gov"  #5/11/2026 changed lda url from https://lda.senate.gov to "ttps://lda.gov to reflect changes to the https://lda.gov/api/redoc/v1/ api that the senate is being depreciated
+  base_url <- "https://lda.gov"  #5/11/2026 changed lda url from https://lda.gov to "ttps://lda.gov to reflect changes to the https://lda.gov/api/redoc/v1/ api that the senate is being depreciated
   filings <- "api/v1/filings/"
 
   req <- httr2::request(base_url) |>
@@ -155,7 +155,7 @@ get_filings <- function(issues = c(""),
         resp_pages = function(resp) {
           count <- httr2::resp_body_json(resp)$count
           if (is.null(count) || count < 1) {
-            stop("The API response counts 0 records returned, or is missing for another reason. Please make sure you have entered at least one query parameter, and they're entered in the correct format and don't conflict. If you've done that and are still having issues, data for this query may be unavailable. Further troubleshooting can be done through the GUI https://lda.senate.gov/filings/public/filing/search/")
+            stop("The API response counts 0 records returned, or is missing for another reason. Please make sure you have entered at least one query parameter, and they're entered in the correct format and don't conflict. If you've done that and are still having issues, data for this query may be unavailable. Further troubleshooting can be done through the GUI https://lda.gov/filings/public/filing/search/")
           }
           ceiling(count / 25)
         }
@@ -163,16 +163,16 @@ get_filings <- function(issues = c(""),
       max_reqs = Inf
     ),
     httr2_http_404 = function(cnd) {
-      rlang::abort("Connection with API unsuccessful. A more detailed error is possible by wrapping your get_filings() query thustly: 'httr2::with_verbosity(get_filings(add your arguments), verbosity = 2)' For more common issues visit https://lda.senate.gov/api/redoc/v1/#section/Common-Errors", parent = cnd)
+      rlang::abort("Connection with API unsuccessful. A more detailed error is possible by wrapping your get_filings() query thustly: 'httr2::with_verbosity(get_filings(add your arguments), verbosity = 2)' For more common issues visit https://lda.gov/api/redoc/v1/#section/Common-Errors", parent = cnd)
     },
     httr2_http_400 = function(cnd){
-      rlang::abort("400 Bad Request typically due to invalid query string parameter values. A more detailed error is possible by wrapping your get_filings() query thustly: 'httr2::with_verbosity(get_filings(add your arguments), verbosity = 2)' For more common issues visit https://lda.senate.gov/api/redoc/v1/#section/Common-Errors", parent = cnd)
+      rlang::abort("400 Bad Request typically due to invalid query string parameter values. A more detailed error is possible by wrapping your get_filings() query thustly: 'httr2::with_verbosity(get_filings(add your arguments), verbosity = 2)' For more common issues visit https://lda.gov/api/redoc/v1/#section/Common-Errors", parent = cnd)
     },
     httr2_http_429 = function(cnd){
-      rlang::abort("Rate limit exceeded. Function throttling set for users with API key. A more detailed error is possible by wrapping your get_filings() query thustly: 'httr2::with_verbosity(get_filings(add your arguments), verbosity = 2)' For more common issues visit https://lda.senate.gov/api/redoc/v1/#section/Common-Errors", parent = cnd)
+      rlang::abort("Rate limit exceeded. Function throttling set for users with API key. A more detailed error is possible by wrapping your get_filings() query thustly: 'httr2::with_verbosity(get_filings(add your arguments), verbosity = 2)' For more common issues visit https://lda.gov/api/redoc/v1/#section/Common-Errors", parent = cnd)
     },
     httr2_http_405 = function(cnd){
-      rlang::abort("unsupported HTTP method. A more detailed error is possible by wrapping your get_filings() query thustly: 'httr2::with_verbosity(get_filings(add your arguments), verbosity = 2)' For more common issues visit https://lda.senate.gov/api/redoc/v1/#section/Common-Errors", parent = cnd)
+      rlang::abort("unsupported HTTP method. A more detailed error is possible by wrapping your get_filings() query thustly: 'httr2::with_verbosity(get_filings(add your arguments), verbosity = 2)' For more common issues visit https://lda.gov/api/redoc/v1/#section/Common-Errors", parent = cnd)
     }
   )
 
@@ -215,7 +215,7 @@ If, for example, in the same quarter of a year an entity has a filing called '1s
 +Registrations and terminations are separate from quarterly lobby spending and must be filtered out to determine an entity's yearly spending on lobbying.\n
 MORE HELPFUL HINTS:\n
 +If an entity name appears as a registrant, but also appears as a client. Do not sum the values. Instead, use the value in the registrant's expenses field to gauge the amount spent on lobbying by the registrant.\n
-SOURCE: Federal lobbying disclosures maintained in the U.S. Senate Lobbying Disclosure Act Database and queried through the official Lobbying Disclosure REST API v1 - Read more here - https://lda.senate.gov/api/redoc/v1/"
+SOURCE: Federal lobbying disclosures maintained in the U.S. Senate Lobbying Disclosure Act Database and queried through the official Lobbying Disclosure REST API v1 - Read more here - https://lda.gov/api/redoc/v1/"
       )
 
     } else {
