@@ -149,7 +149,7 @@ flagged_and_clean_conflict <- flag_client_registrant_conflict(seven_eleven_filin
 
 ## API Key
 
--   API keys can be requested at: <https://lda.senate.gov/api/register/>
+-   API keys can be requested at: <https://lda.gov/api/register/> 
 -   Store your key securely with `set_senate_api_key()`.
 
 ------------------------------------------------------------------------
