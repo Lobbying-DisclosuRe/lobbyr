@@ -73,7 +73,7 @@ issue_joiner =  "or",
 #> 
 #> +If an entity name appears as a registrant, but also appears as a client. Do not sum the values. Instead, use the value in the registrant's expenses field to gauge the amount spent on lobbying by the registrant.
 #> 
-#> SOURCE: Federal lobbying disclosures maintained in the U.S. Senate Lobbying Disclosure Act Database and queried through the official Lobbying Disclosure REST API v1 - Read more here - https://lda.senate.gov/api/redoc/v1/
+#> SOURCE: Federal lobbying disclosures maintained in the U.S. Senate Lobbying Disclosure Act Database and queried through the official Lobbying Disclosure REST API v1 - Read more here - https://lda.gov/api/redoc/v1/
 
 # Flag and clean duplicate filings
 dupes_flag_test <- flag_dupes(seven_eleven_filings, find_duplicates = TRUE, attempt_cleaning = TRUE)
@@ -187,7 +187,7 @@ flagged_and_clean_conflict <- flag_client_registrant_conflict(seven_eleven_filin
 
 ## API Key
 
-- API keys can be requested at: <https://lda.senate.gov/api/register/>
+- API keys can be requested at: <https://lda.gov/api/register/>
 - Store your key securely with `set_senate_api_key()`.
 
 ------------------------------------------------------------------------
