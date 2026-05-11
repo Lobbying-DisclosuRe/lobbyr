@@ -8,7 +8,7 @@
 #' @details
 #' This function uses \code{keyring::key_set()} to securely store the API key under the name "senate_api_key". The function pauses briefly to allow the user to read instructions before prompting for input.
 #'
-#' #' API keys can be requested at: \url{https://lda.senate.gov/api/register/}
+#' #' API keys can be requested at: \url{https://lda.gov/api/register/}
 #'
 #' @returns Invisibly returns \code{NULL}. The API key is stored securely in the system keyring.
 #' @export
@@ -30,7 +30,7 @@
 #' @seealso [keyring::key_set()] for secure key storage, and [get_filings()] for using the stored API key.
 set_senate_api_key <- function(api_key) {
   message("enter api key when password request appears")
-  message("API keys can be requested here https://lda.senate.gov/api/register/")
+  message("API keys can be requested here https://lda.gov/api/register/")
   message("Pausing for 5 seconds so you can read...")
   Sys.sleep(5)
   message("Ok, now you can enter your api key")
